@@ -1,1 +1,12 @@
-.vs
+build/
+log/
+[Bb]in/
+[Dd]ebug*/
+[Rr]elease*/
+obj/
+packages/
+.vs/
+*.suo
+*.user
+*.log
+*.orig
