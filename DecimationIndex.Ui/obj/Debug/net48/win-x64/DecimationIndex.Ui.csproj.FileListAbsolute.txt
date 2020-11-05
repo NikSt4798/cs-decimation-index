@@ -1,0 +1,16 @@
+D:\Projects\cs--decimation-index\DecimationIndex.Ui\obj\Debug\net48\win-x64\MainWindow.g.cs
+D:\Projects\cs--decimation-index\DecimationIndex.Ui\obj\Debug\net48\win-x64\App.g.cs
+D:\Projects\cs--decimation-index\DecimationIndex.Ui\obj\Debug\net48\win-x64\DecimationIndex.Ui_MarkupCompile.cache
+D:\Projects\cs--decimation-index\DecimationIndex.Ui\obj\Debug\net48\win-x64\DecimationIndex.Ui_MarkupCompile.lref
+D:\Projects\cs--decimation-index\DecimationIndex.Ui\bin\Debug\net48\win-x64\DecimationIndex.Ui.exe.config
+D:\Projects\cs--decimation-index\DecimationIndex.Ui\bin\Debug\net48\win-x64\DecimationIndex.Ui.exe
+D:\Projects\cs--decimation-index\DecimationIndex.Ui\bin\Debug\net48\win-x64\DecimationIndex.Ui.pdb
+D:\Projects\cs--decimation-index\DecimationIndex.Ui\obj\Debug\net48\win-x64\MainWindow.baml
+D:\Projects\cs--decimation-index\DecimationIndex.Ui\obj\Debug\net48\win-x64\DecimationIndex.Ui.g.resources
+D:\Projects\cs--decimation-index\DecimationIndex.Ui\obj\Debug\net48\win-x64\DecimationIndex.Ui.Properties.Resources.resources
+D:\Projects\cs--decimation-index\DecimationIndex.Ui\obj\Debug\net48\win-x64\DecimationIndex.Ui.csproj.GenerateResource.cache
+D:\Projects\cs--decimation-index\DecimationIndex.Ui\obj\Debug\net48\win-x64\DecimationIndex.Ui.AssemblyInfoInputs.cache
+D:\Projects\cs--decimation-index\DecimationIndex.Ui\obj\Debug\net48\win-x64\DecimationIndex.Ui.AssemblyInfo.cs
+D:\Projects\cs--decimation-index\DecimationIndex.Ui\obj\Debug\net48\win-x64\DecimationIndex.Ui.csproj.CoreCompileInputs.cache
+D:\Projects\cs--decimation-index\DecimationIndex.Ui\obj\Debug\net48\win-x64\DecimationIndex.Ui.exe
+D:\Projects\cs--decimation-index\DecimationIndex.Ui\obj\Debug\net48\win-x64\DecimationIndex.Ui.pdb

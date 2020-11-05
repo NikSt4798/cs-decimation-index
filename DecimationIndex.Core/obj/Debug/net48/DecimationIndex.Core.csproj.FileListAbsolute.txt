@@ -1,0 +1,8 @@
+D:\Projects\cs--decimation-index\DecimationIndex.Core\bin\Debug\net48\DecimationIndex.Core.dll
+D:\Projects\cs--decimation-index\DecimationIndex.Core\bin\Debug\net48\DecimationIndex.Core.pdb
+D:\Projects\cs--decimation-index\DecimationIndex.Core\obj\Debug\net48\DecimationIndex.Core.csprojAssemblyReference.cache
+D:\Projects\cs--decimation-index\DecimationIndex.Core\obj\Debug\net48\DecimationIndex.Core.AssemblyInfoInputs.cache
+D:\Projects\cs--decimation-index\DecimationIndex.Core\obj\Debug\net48\DecimationIndex.Core.AssemblyInfo.cs
+D:\Projects\cs--decimation-index\DecimationIndex.Core\obj\Debug\net48\DecimationIndex.Core.csproj.CoreCompileInputs.cache
+D:\Projects\cs--decimation-index\DecimationIndex.Core\obj\Debug\net48\DecimationIndex.Core.dll
+D:\Projects\cs--decimation-index\DecimationIndex.Core\obj\Debug\net48\DecimationIndex.Core.pdb
