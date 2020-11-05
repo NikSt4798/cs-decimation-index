@@ -1,9 +1,5 @@
 build/
 log/
-[Bb]in/
-[Dd]ebug*/
-[Rr]elease*/
-obj/
 packages/
 .vs/
 *.suo
