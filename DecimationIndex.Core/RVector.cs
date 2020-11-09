@@ -27,7 +27,7 @@ namespace DecimationIndex.Core
 				throw new ArgumentOutOfRangeException(nameof(s),$"{nameof(p)}^{nameof(s)} - 1 must be less than 10000000 ");
 			}
 
-			if (!GetDividers(s).Contains(m))
+			if (!MathHelpers.GetDividers(s).Contains(m))
 			{
 				throw new ArgumentOutOfRangeException(nameof(m),$"{nameof(m)} must be among the dividers of {nameof(s)} ");
 			}
@@ -76,7 +76,7 @@ namespace DecimationIndex.Core
 			//Оставляем только те, у которых НОД(2^m-1) = 1
 			foreach (var number in InitialList)
 			{
-				if (GetNod((int)Math.Pow(2, _m) - 1, number) == 1)
+				if (MathHelpers.GetNod((int)Math.Pow(2, _m) - 1, number) == 1)
 				{
 					FilteredList.Add(number);
 				}
@@ -92,33 +92,6 @@ namespace DecimationIndex.Core
 			GofRVector = GetGofRVector(PBasisList);
 		}
 		
-		/// <summary>
-		/// Возвращает все делители числа s
-		/// </summary>
-		private List<int> GetDividers(int s)
-		{
-			var list = new List<int>();
-
-			for (var i = 1; i * i <= s; i++)
-			{
-				if(s % i == 0)
-					list.Add(i);
-			}
-
-			return list;
-		}
-
-		/// <summary>
-		/// Рекурсивно находит наименьший общий делитель между двумя числами
-		/// </summary>
-		private int GetNod(int val1, int val2)
-		{
-			if (val2 == 0)
-				return val1;
-			else
-				return GetNod(val2, val1 % val2);
-		}
-
 		/// <summary>
 		/// Выполняет прореживание по p-сопряженным элементам
 		/// </summary>
