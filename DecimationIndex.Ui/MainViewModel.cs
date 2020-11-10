@@ -7,6 +7,8 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using DecimationIndex.Core;
 using DecimationIndex.Ui.Annotations;
+using DecimationIndex.Ui.Commands;
+using DecimationIndex.Ui.ViewModels;
 
 namespace DecimationIndex.Ui
 {
@@ -14,8 +16,23 @@ namespace DecimationIndex.Ui
 	{
 		public MainViewModel()
 		{
-			SelectedPValue = AvailablePValues.First();
 			SValue = 2;
+			SelectedPValue = AvailablePValues.First();
+
+			CalculateCommand = new RelayCommand(Execute);
+		}
+
+		public RelayCommand CalculateCommand { get; set; }
+
+		private RVectorViewModel _rVectorViewModel;
+		public RVectorViewModel RVectorViewModel
+		{
+			get => _rVectorViewModel;
+			set
+			{
+				_rVectorViewModel = value;
+				OnPropertyChanged(nameof(RVectorViewModel));
+			}
 		}
 
 		public IReadOnlyCollection<int> AvailablePValues { get; } = new[] {2, 3, 5, 7, 11, 13};
@@ -74,6 +91,7 @@ namespace DecimationIndex.Ui
 		
 
 		private Visibility _sWarningVisibility;
+
 		public Visibility SWarningVisibility
 		{
 			get => _sWarningVisibility;
@@ -82,6 +100,13 @@ namespace DecimationIndex.Ui
 				_sWarningVisibility = value;
 				OnPropertyChanged(nameof(SWarningVisibility));
 			}
+		}
+		
+		private void Execute(object obj)
+		{
+			var rVector = new RVector(SelectedPValue, SelectedMValue, SValue);
+
+			RVectorViewModel = new RVectorViewModel(rVector);
 		}
 
 		private void Validate()
@@ -94,6 +119,8 @@ namespace DecimationIndex.Ui
 			{
 				AvailableMValues.Add(value);
 			}
+
+			SelectedMValue = AvailableMValues.First();
 
 			var period = Math.Pow(SelectedPValue, SValue) - 1;
 

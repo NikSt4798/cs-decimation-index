@@ -76,7 +76,7 @@ namespace DecimationIndex.Core
 			//Оставляем только те, у которых НОД(2^m-1) = 1
 			foreach (var number in InitialList)
 			{
-				if (MathHelpers.GetNod((int)Math.Pow(2, _m) - 1, number) == 1)
+				if (MathHelpers.GetNod((int)Math.Pow(_p, _m) - 1, number) == 1)
 				{
 					FilteredList.Add(number);
 				}
@@ -101,12 +101,20 @@ namespace DecimationIndex.Core
 
 			foreach (var a in list)
 			{
-				var b = a * 3 % _period;
-				var c = b * 3 % _period;
+				//var b = a * _p % ((int)Math.Pow(_p, _m) - 1);
+				//var c = b * _p % ((int)Math.Pow(_p, _m) - 1);
 
-				var array = new[] {a, b, c};
+				var array = new int[_m];
 
-				if(!thinnedList.Contains(array.Min()))
+				array[0] = a;
+
+				for (var i = 1; i < _m; i++)
+				{
+					array[i] = array[i-1]*_m % ((int)Math.Pow(_p, _m) - 1);
+					//array[i] = (int)Math.Pow(a, Math.Pow(_p, i));
+				}
+
+				if(a == array.Min())
 				{
 					thinnedList.Add(array.Min());
 				}
@@ -143,10 +151,10 @@ namespace DecimationIndex.Core
 			{
 				int digit;
 				
-				if (number / p != 0)
-					digit = number / p;
-				else
-					digit = number % p;
+				//if (number / p != 0)
+				//	digit = number / p;
+				//else
+				digit = number % p;
 
 				if (digit >= 10)
 					result += GetSymbol(digit);
