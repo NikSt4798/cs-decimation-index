@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DecimationIndex.Core
+namespace DecimationIndex.Core.RVector
 {
-	public class RVector
+	public sealed class RVector : IRVector
 	{
 		private static readonly int[] AvailableP = {2, 3, 5, 7, 11, 13};
 		
@@ -27,7 +27,7 @@ namespace DecimationIndex.Core
 				throw new ArgumentOutOfRangeException(nameof(s),$"{nameof(p)}^{nameof(s)} - 1 must be less than 10000000 ");
 			}
 
-			if (!GetDividers(s).Contains(m))
+			if (!MathHelpers.GetDividers(s).Contains(m))
 			{
 				throw new ArgumentOutOfRangeException(nameof(m),$"{nameof(m)} must be among the dividers of {nameof(s)} ");
 			}
@@ -40,30 +40,24 @@ namespace DecimationIndex.Core
 			GetVectorComponents();
 		}
 
-		/// <summary>
-		/// Изначальный список целых чисел
-		/// </summary>
-		public List<int> InitialList { get; } = new List<int>();
+		
+		public IList<int> InitialList { get; } = new List<int>();
 
-		/// <summary>
-		/// Список чисел с НОД = 1
-		/// </summary>
-		public List<int> FilteredList { get; } = new List<int>();
+		public IList<int> FilteredList { get; } = new List<int>();
 
-		/// <summary>
-		/// Прореженный список по p-сопряженным элементам (вектор R)
-		/// </summary>
-		public List<int> ThinnedList { get; private set; }
+		public IList<int> ThinnedList { get; private set; }
 
-		/// <summary>
-		/// Вектор R в p-ичной системе счисления
-		/// </summary>
-		public List<string> PBasisList { get; private set; }
+		public IList<string> PBasisList { get; private set; }
 
-		/// <summary>
-		/// Набор g(r) для всех значений вектора R
-		/// </summary>
-		public List<int> GofRVector { get; private set; }
+		public IList<int> GofRVector { get; private set; }
+
+		public IList<int> CList { get; private set; }
+
+		public IList<int> C1List { get; private set; }
+
+		public IList<int> C2List { get; private set; }
+
+		public IList<int> C3List { get; private set; }
 
 		private void GetVectorComponents()
 		{
@@ -76,7 +70,7 @@ namespace DecimationIndex.Core
 			//Оставляем только те, у которых НОД(2^m-1) = 1
 			foreach (var number in InitialList)
 			{
-				if (GetNod((int)Math.Pow(2, _m) - 1, number) == 1)
+				if (MathHelpers.GetNod((int)Math.Pow(_p, _m) - 1, number) == 1)
 				{
 					FilteredList.Add(number);
 				}
@@ -93,47 +87,28 @@ namespace DecimationIndex.Core
 		}
 		
 		/// <summary>
-		/// Возвращает все делители числа s
-		/// </summary>
-		private List<int> GetDividers(int s)
-		{
-			var list = new List<int>();
-
-			for (var i = 1; i * i <= s; i++)
-			{
-				if(s % i == 0)
-					list.Add(i);
-			}
-
-			return list;
-		}
-
-		/// <summary>
-		/// Рекурсивно находит наименьший общий делитель между двумя числами
-		/// </summary>
-		private int GetNod(int val1, int val2)
-		{
-			if (val2 == 0)
-				return val1;
-			else
-				return GetNod(val2, val1 % val2);
-		}
-
-		/// <summary>
 		/// Выполняет прореживание по p-сопряженным элементам
 		/// </summary>
-		private List<int> PConjugateThinning(List<int> list)
+		private IList<int> PConjugateThinning(IEnumerable<int> list)
 		{
 			var thinnedList = new List<int>();
 
 			foreach (var a in list)
 			{
-				var b = a * 3 % _period;
-				var c = b * 3 % _period;
+				//var b = a * _p % ((int)Math.Pow(_p, _m) - 1);
+				//var c = b * _p % ((int)Math.Pow(_p, _m) - 1);
 
-				var array = new[] {a, b, c};
+				var array = new int[_m];
 
-				if(!thinnedList.Contains(array.Min()))
+				array[0] = a;
+
+				for (var i = 1; i < _m; i++)
+				{
+					array[i] = array[i-1]*_p % ((int)Math.Pow(_p, _m) - 1);
+					//array[i] = (int)Math.Pow(a, Math.Pow(_p, i));
+				}
+
+				if(a == array.Min())
 				{
 					thinnedList.Add(array.Min());
 				}
@@ -145,7 +120,7 @@ namespace DecimationIndex.Core
 		/// <summary>
 		/// Вычисляет функцию g(r) для каждого значения в списке. Функция численно равна сумме позиций p-ичного представления числа r.
 		/// </summary>
-		private List<string> GetPBasisList(List<int> list, int p)
+		private IList<string> GetPBasisList(IEnumerable<int> list, int p)
 		{
 			var result = new List<string>();
 
@@ -170,10 +145,10 @@ namespace DecimationIndex.Core
 			{
 				int digit;
 				
-				if (number / p != 0)
-					digit = number / p;
-				else
-					digit = number % p;
+				//if (number / p != 0)
+				//	digit = number / p;
+				//else
+				digit = number % p;
 
 				if (digit >= 10)
 					result += GetSymbol(digit);
@@ -207,7 +182,7 @@ namespace DecimationIndex.Core
 		/// <summary>
 		/// Применяет функцию g(r) ко всем элементам списка
 		/// </summary>
-		private List<int> GetGofRVector(List<string> vector)
+		private IList<int> GetGofRVector(IEnumerable<string> vector)
 		{
 			var result = new List<int>();
 
