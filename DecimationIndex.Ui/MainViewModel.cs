@@ -6,8 +6,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using DecimationIndex.Core;
-using DecimationIndex.Ui.Annotations;
+using DecimationIndex.Core.RVector;
 using DecimationIndex.Ui.Commands;
+using DecimationIndex.Ui.Properties;
 using DecimationIndex.Ui.ViewModels;
 
 namespace DecimationIndex.Ui
