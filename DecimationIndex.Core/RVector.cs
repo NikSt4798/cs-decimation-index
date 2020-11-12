@@ -110,7 +110,7 @@ namespace DecimationIndex.Core
 
 				for (var i = 1; i < _m; i++)
 				{
-					array[i] = array[i-1]*_m % ((int)Math.Pow(_p, _m) - 1);
+					array[i] = array[i-1]*_p % ((int)Math.Pow(_p, _m) - 1);
 					//array[i] = (int)Math.Pow(a, Math.Pow(_p, i));
 				}
 
