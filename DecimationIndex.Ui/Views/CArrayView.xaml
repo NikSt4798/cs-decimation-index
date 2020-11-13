@@ -1,7 +1,7 @@
-﻿<UserControl x:Class="DecimationIndex.Ui.Views.RVectorView"
+﻿<UserControl x:Class="DecimationIndex.Ui.Views.CArrayView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DesignHeight="450"
              d:DesignWidth="800"
@@ -20,11 +20,12 @@
 	        BorderBrush="Black"
 	        BorderThickness="2">
 		<StackPanel>
-			<TextBlock Text="{Binding InitialList}" />
-			<TextBlock Text="{Binding FilteredList}" />
-			<TextBlock Text="{Binding ThinnedList}" />
-			<TextBlock Text="{Binding PBasisList}" />
-			<TextBlock Text="{Binding GofRVector}" />
+			<TextBlock Text="{Binding CArray}" />
+			<TextBlock Text="{Binding C1Array}" />
+			<TextBlock Text="{Binding C2Array}" />
+			<TextBlock Text="{Binding C3Array}" />
+			<TextBlock Text="{Binding CBasisArray}" />
+			<TextBlock Text="{Binding MValue}" />
 		</StackPanel>
 	</Border>
 </UserControl>

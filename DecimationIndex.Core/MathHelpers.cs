@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DecimationIndex.Core
 {
@@ -37,6 +38,9 @@ namespace DecimationIndex.Core
 		/// </summary>
 		public static char GetSymbol(this int digit)
 		{
+			if (digit < 10)
+				return digit.ToString().First();
+
 			switch (digit)
 			{
 				case 10:

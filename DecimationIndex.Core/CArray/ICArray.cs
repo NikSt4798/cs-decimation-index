@@ -7,21 +7,26 @@ namespace DecimationIndex.Core.CArray
 		/// <summary>
 		/// Компоненты массива C
 		/// </summary>
-		IList<string> CList { get; }
+		IList<int> CList { get; }
 
 		/// <summary>
 		/// Компоненты массива C, значение функции g(r) которых равно выбранному r
 		/// </summary>
-		IList<string> C1List { get; }
+		IList<int> C1List { get; }
 		
 		/// <summary>
 		/// Массив минимальных элементов для каждой p-сопряженной группы
 		/// </summary>
-		IList<string> C2List { get; }
+		IList<int> C2List { get; }
 		
 		/// <summary>
-		/// Наименьшие уникальные элементы массива С2
+		/// Индексы децимации
 		/// </summary>
-		IList<string> C3List { get; }
+		IList<int> C3List { get; }
+
+		/// <summary>
+		/// Индексы децимации в p-ичной системе счисления
+		/// </summary>
+		IList<string> CBasisList { get; }
 	}
 }

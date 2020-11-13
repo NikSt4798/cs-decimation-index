@@ -51,14 +51,6 @@ namespace DecimationIndex.Core.RVector
 
 		public IList<int> GofRVector { get; private set; }
 
-		public IList<int> CList { get; private set; }
-
-		public IList<int> C1List { get; private set; }
-
-		public IList<int> C2List { get; private set; }
-
-		public IList<int> C3List { get; private set; }
-
 		private void GetVectorComponents()
 		{
 			//Получаем целые числа в интервале от 1 до p^m-2
