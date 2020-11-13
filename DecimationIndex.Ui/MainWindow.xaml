@@ -12,11 +12,16 @@
 		<local:MainViewModel />
 	</Window.DataContext>
 	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
-		<Grid Grid.Column="0">
+		<Grid Grid.Column="0"
+		      Grid.RowSpan="2">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="Auto" />
@@ -80,9 +85,21 @@
 			        Command="{Binding CalculateCommand}"
 			        Content="Вычислить R вектор" />
 
+			<ComboBox Grid.Row="3"
+			          Grid.Column="1"
+			          Margin="20,20,5,20"
+			          ItemsSource="{Binding AvailableRValues}"
+			          SelectedItem="{Binding SelectedRValue, UpdateSourceTrigger=PropertyChanged}"
+			          Visibility="{Binding RVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+
 		</Grid>
 
-		<ContentPresenter Grid.Column="1"
+		<ContentPresenter Grid.Row="0"
+		                  Grid.Column="1"
 		                  Content="{Binding RVectorViewModel, UpdateSourceTrigger=PropertyChanged}" />
+
+		<ContentPresenter Grid.Row="1"
+		                  Grid.Column="1"
+		                  Content="{Binding CArrayViewModel, UpdateSourceTrigger=PropertyChanged}" />
 	</Grid>
 </Window>

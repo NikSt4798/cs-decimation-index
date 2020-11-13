@@ -28,13 +28,5 @@ namespace DecimationIndex.Core.RVector
 		/// Набор g(r) для всех значений вектора R
 		/// </summary>
 		IList<int> GofRVector { get; }
-
-		IList<int> CList { get; }
-
-		IList<int> C1List { get; }
-
-		IList<int> C2List { get; }
-
-		IList<int> C3List { get; }
 	}
 }

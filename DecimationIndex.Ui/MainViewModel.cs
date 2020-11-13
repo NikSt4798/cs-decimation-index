@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using DecimationIndex.Core;
+using DecimationIndex.Core.CArray;
 using DecimationIndex.Core.RVector;
 using DecimationIndex.Ui.Commands;
 using DecimationIndex.Ui.Properties;
@@ -33,6 +34,17 @@ namespace DecimationIndex.Ui
 			{
 				_rVectorViewModel = value;
 				OnPropertyChanged(nameof(RVectorViewModel));
+			}
+		}
+
+		private CArrayViewModel _cArrayViewModel;
+		public CArrayViewModel CArrayViewModel
+		{
+			get => _cArrayViewModel;
+			set
+			{
+				_cArrayViewModel = value;
+				OnPropertyChanged(nameof(CArrayViewModel));
 			}
 		}
 
@@ -66,6 +78,21 @@ namespace DecimationIndex.Ui
 			}
 		}
 
+		public ObservableCollection<int> AvailableRValues { get; } = new ObservableCollection<int>();
+
+		private int _selectedRValue;
+		public int SelectedRValue
+		{
+			get => _selectedRValue;
+			set
+			{
+				_selectedRValue = value;
+				OnPropertyChanged(nameof(SelectedRValue));
+
+				CArrayViewModel = new CArrayViewModel(new CArray(SelectedPValue, SelectedMValue, NValue, SelectedRValue));
+			}
+		}
+
 		private int _sValue;
 		public int SValue
 		{
@@ -92,7 +119,6 @@ namespace DecimationIndex.Ui
 		
 
 		private Visibility _sWarningVisibility;
-
 		public Visibility SWarningVisibility
 		{
 			get => _sWarningVisibility;
@@ -102,12 +128,33 @@ namespace DecimationIndex.Ui
 				OnPropertyChanged(nameof(SWarningVisibility));
 			}
 		}
+
+		private Visibility _rVisibility = Visibility.Hidden;
+		public Visibility RVisibility
+		{
+			get => _rVisibility;
+			set
+			{
+				_rVisibility = value;
+				OnPropertyChanged(nameof(RVisibility));
+			}
+		}
 		
 		private void Execute(object obj)
 		{
 			var rVector = new RVector(SelectedPValue, SelectedMValue, SValue);
 
 			RVectorViewModel = new RVectorViewModel(rVector);
+
+			AvailableRValues.Clear();
+
+			foreach (var item in rVector.ThinnedList)
+			{
+				AvailableRValues.Add(item);
+			}
+
+			SelectedRValue = AvailableRValues.First();
+			RVisibility = Visibility.Visible;
 		}
 
 		private void Validate()
