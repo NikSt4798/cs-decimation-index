@@ -1,5 +1,7 @@
-﻿using DecimationIndex.Core.CArray;
-using DecimationIndex.Ui.Helpers;
+﻿using DecimationIndex.Core;
+using DecimationIndex.Core.CArray;
+using DecimationIndex.Ui.Items;
+using System.Collections.Generic;
 
 namespace DecimationIndex.Ui.ViewModels
 {
@@ -7,20 +9,19 @@ namespace DecimationIndex.Ui.ViewModels
 	{
 		public CArrayViewModel(ICArray cArray)
 		{
-			CArray =  cArray.CList.GetListString("Массив C: ");
-			C1Array = cArray.C1List.GetListString("Массив C1: ");
-			C2Array = cArray.C2List.GetListString("Массив C2: ");
-			C3Array = cArray.C3List.GetListString("Индексы децимации: ");
-			CBasisArray = cArray.CBasisList.GetListString("Индексы децимации в p-ичной системе счисления: ");
 
-			MValue = $"Объем М массива : {cArray.C3List.Count}";
+			foreach (var value in cArray.C3List)
+			{
+				var vector = new Vector
+				{
+					Value = value,
+					BasisValue = value.GetPBasis(cArray.Basis)
+				};
+
+				DecimationIndices.Add(vector);
+			}
 		}
 
-		public string CArray { get; }
-		public string C1Array { get; }
-		public string C2Array { get; }
-		public string C3Array { get; }
-		public string CBasisArray { get; }
-		public string MValue { get; }
+		public IList<Vector> DecimationIndices { get; } = new List<Vector>();
 	}
 }

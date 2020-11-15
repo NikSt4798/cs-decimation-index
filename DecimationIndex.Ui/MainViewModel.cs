@@ -18,13 +18,16 @@ namespace DecimationIndex.Ui
 	{
 		public MainViewModel()
 		{
-			SValue = 2;
 			SelectedPValue = AvailablePValues.First();
 
 			CalculateCommand = new RelayCommand(Execute);
+
+			InfoViewModel = new InfoViewModel();
 		}
 
 		public RelayCommand CalculateCommand { get; set; }
+
+		public IInfoViewModel InfoViewModel { get; }
 
 		private RVectorViewModel _rVectorViewModel;
 		public RVectorViewModel RVectorViewModel
@@ -89,11 +92,24 @@ namespace DecimationIndex.Ui
 				_selectedRValue = value;
 				OnPropertyChanged(nameof(SelectedRValue));
 
-				CArrayViewModel = new CArrayViewModel(new CArray(SelectedPValue, SelectedMValue, NValue, SelectedRValue));
+				var array = new CArray(SelectedPValue, SelectedMValue, NValue, SelectedRValue);
+				CArrayViewModel = new CArrayViewModel(array);
+				InfoViewModel.InitArray(array);
 			}
 		}
 
-		private int _sValue;
+		private int _maxSValue;
+		public int MaxSValue
+		{
+			get => _maxSValue;
+			set
+			{
+				_maxSValue = value;
+				OnPropertyChanged(nameof(MaxSValue));
+			}
+		}
+
+		private int _sValue = 2;
 		public int SValue
 		{
 			get => _sValue;
@@ -142,13 +158,14 @@ namespace DecimationIndex.Ui
 		
 		private void Execute(object obj)
 		{
-			var rVector = new RVector(SelectedPValue, SelectedMValue, SValue);
+			var rVector = new RVector(SelectedPValue, SelectedMValue);
 
 			RVectorViewModel = new RVectorViewModel(rVector);
+			InfoViewModel.InitVector(rVector);
 
 			AvailableRValues.Clear();
 
-			foreach (var item in rVector.ThinnedList)
+			foreach (var item in rVector.Vector)
 			{
 				AvailableRValues.Add(item);
 			}
@@ -170,9 +187,32 @@ namespace DecimationIndex.Ui
 
 			SelectedMValue = AvailableMValues.First();
 
-			var period = Math.Pow(SelectedPValue, SValue) - 1;
+			MaxSValue = GetMaxSValue(SelectedPValue);
 
-			SWarningVisibility = period < 10000000 ? Visibility.Collapsed : Visibility.Visible;
+			//var period = Math.Pow(SelectedPValue, SValue) - 1;
+
+			//SWarningVisibility = period < 10000000 ? Visibility.Collapsed : Visibility.Visible;
+		}
+
+		private int GetMaxSValue(int p)
+		{
+			switch (p)
+			{
+				case 2:
+					return 24;
+				case 3:
+					return 15;
+				case 5:
+					return 10;
+				case 7:
+					return 9;
+				case 11:
+					return 7;
+				case 13:
+					return 7;
+				default:
+					throw new ArgumentOutOfRangeException(nameof(p), "This was never supposed to happen");
+			}
 		}
 
 		#region INotifyPropertyChanged

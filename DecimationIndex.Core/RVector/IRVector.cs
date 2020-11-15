@@ -5,6 +5,16 @@ namespace DecimationIndex.Core.RVector
 	public interface IRVector
 	{
 		/// <summary>
+		/// Прореженный список по p-сопряженным элементам (вектор R)
+		/// </summary>
+		IList<int> Vector { get; }
+
+		/// <summary>
+		/// Основание системы счисления
+		/// </summary>
+		int Basis { get; }
+
+		/// <summary>
 		/// Изначальный список целых чисел
 		/// </summary>
 		IList<int> InitialList { get; }

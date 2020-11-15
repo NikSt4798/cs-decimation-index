@@ -19,7 +19,7 @@ namespace DecimationIndex.Core.CArray
 			_n = n;
 			_r = r;
 			_s = m * n;
-
+			
 			CList = FormCArray();
 			C1List = FormC1Array(CList);
 			C2List = FormC2Array(C1List);
@@ -32,6 +32,8 @@ namespace DecimationIndex.Core.CArray
 		public IList<int> C2List { get; }
 		public IList<int> C3List { get; }
 		public IList<string> CBasisList { get; }
+
+		public int Basis => _p;
 
 		private IList<int> FormCArray()
 		{

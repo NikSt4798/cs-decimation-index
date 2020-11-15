@@ -4,102 +4,140 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:DecimationIndex.Ui"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        Title="MainWindow"
-        Width="800"
-        Height="450"
+        Title="Вычисление индексов децимации"
+        Width="820"
+        Height="600"
         mc:Ignorable="d">
 	<Window.DataContext>
 		<local:MainViewModel />
 	</Window.DataContext>
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-		</Grid.RowDefinitions>
+	<Window.Resources>
+		<Style TargetType="TextBlock">
+			<Setter Property="FontSize" Value="14" />
+		</Style>
+	</Window.Resources>
+	<Grid Margin="10">
 		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="Auto" />
 			<ColumnDefinition Width="Auto" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
-		<Grid Grid.Column="0"
-		      Grid.RowSpan="2">
+		<Grid Grid.RowSpan="2"
+		      Grid.Column="0"
+			  Width="320"
+		      Margin="0,0,20,0">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 			<TextBlock Grid.Row="0"
 			           Grid.Column="0"
-			           Margin="20,20,5,20"
-			           Text="Значение p:" />
+			           Margin="10,10,0,0"
+			           Text="Значение p :" />
+
+			<TextBlock Grid.Row="1"
+			           Grid.Column="0"
+			           Margin="10,10,0,0"
+			           Text="Значение S :" />
+
+			<TextBlock Grid.Row="2"
+			           Grid.Column="0"
+			           Margin="10,13,0,0"
+			           Text="Значение m :" />
+
+			<TextBlock Grid.Row="3"
+			           Grid.Column="0"
+			           Margin="10,10,0,0"
+			           Text="Значение n :" />
+
+			<TextBlock Grid.Row="5"
+			           Grid.Column="0"
+			           Margin="10,10,0,0"
+			           Text="Выбранное r :" />
+
 			<ComboBox Grid.Row="0"
 			          Grid.Column="1"
 			          Height="Auto"
-			          Margin="20,20,5,20"
+			          Margin="10,10,0,0"
 			          ItemsSource="{Binding AvailablePValues}"
 			          SelectedItem="{Binding SelectedPValue, UpdateSourceTrigger=PropertyChanged}" />
 
-			<TextBlock Grid.Row="1"
-			           Grid.Column="0"
-			           Margin="20,20,5,20"
-			           Text="Значение S:" />
-			<TextBox Grid.Row="1"
-			         Grid.Column="1"
-			         Margin="20,20,5,20"
-			         Text="{Binding SValue, UpdateSourceTrigger=PropertyChanged}" />
-			<TextBlock Grid.Row="1"
-			           Grid.Column="2"
-			           Margin="20,20,5,20"
-			           Foreground="Red"
-			           Text="Период N = p^S - 1 превышает 10 000 000"
-			           Visibility="{Binding SWarningVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+			<DockPanel Grid.Row="1"
+			           Grid.Column="1"
+			           Margin="10,10,0,0"
+			           LastChildFill="True">
 
-			<TextBlock Grid.Row="2"
-			           Grid.Column="0"
-			           Margin="20,20,5,20"
-			           Text="Значение m:" />
+				<TextBlock Margin="0,0,5,0"
+				           DockPanel.Dock="Left"
+				           Text="2" />
+				<TextBlock Margin="5,0,5,0"
+				           DockPanel.Dock="Right"
+				           Text="{Binding MaxSValue, UpdateSourceTrigger=PropertyChanged}" />
+
+				<Slider Width="100"
+				        AutoToolTipPlacement="TopLeft"
+				        Maximum="{Binding MaxSValue, UpdateSourceTrigger=PropertyChanged}"
+				        Minimum="2"
+				        Value="{Binding SValue, UpdateSourceTrigger=PropertyChanged}" />
+
+			</DockPanel>
+
 			<ComboBox Grid.Row="2"
 			          Grid.Column="1"
 			          Height="Auto"
-			          Margin="20,20,5,20"
+			          Margin="10,10,0,0"
 			          ItemsSource="{Binding AvailableMValues}"
 			          SelectedItem="{Binding SelectedMValue, UpdateSourceTrigger=PropertyChanged}" />
-			<TextBlock Grid.Row="2"
-			           Grid.Column="2"
-			           Margin="20,20,5,20"
-			           Text="Значение n:" />
-			<TextBlock Grid.Row="2"
-			           Grid.Column="3"
-			           Margin="20,20,5,20"
+
+			<TextBlock Grid.Row="3"
+			           Grid.Column="1"
+			           Margin="10,10,0,0"
 			           Text="{Binding NValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
 
-			<Button Grid.Row="3"
+			<Button Grid.Row="4"
 			        Grid.Column="0"
-			        Margin="20,20,5,20"
+			        Grid.ColumnSpan="2"
+			        Margin="10,20,5,0"
+			        Padding="10"
 			        Command="{Binding CalculateCommand}"
 			        Content="Вычислить R вектор" />
 
-			<ComboBox Grid.Row="3"
+			<ComboBox Grid.Row="5"
 			          Grid.Column="1"
-			          Margin="20,20,5,20"
+			          Margin="20,10,5,20"
 			          ItemsSource="{Binding AvailableRValues}"
 			          SelectedItem="{Binding SelectedRValue, UpdateSourceTrigger=PropertyChanged}"
-			          Visibility="{Binding RVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+			          Visibility="{Binding RVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+
+
+			<Expander Grid.Row="6"
+			          Grid.Column="0"
+			          Grid.ColumnSpan="2"
+			          ExpandDirection="Down"
+					  IsExpanded="False"
+			          Header="Подробная информация">
+				<ContentPresenter Width="300" Content="{Binding InfoViewModel}"/>
+			</Expander>
 
 		</Grid>
 
-		<ContentPresenter Grid.Row="0"
-		                  Grid.Column="1"
+		<ContentPresenter Grid.Column="1"
+		                  Margin="0,0,20,0"
 		                  Content="{Binding RVectorViewModel, UpdateSourceTrigger=PropertyChanged}" />
 
-		<ContentPresenter Grid.Row="1"
-		                  Grid.Column="1"
+		<ContentPresenter Grid.Column="2"
 		                  Content="{Binding CArrayViewModel, UpdateSourceTrigger=PropertyChanged}" />
+
 	</Grid>
 </Window>

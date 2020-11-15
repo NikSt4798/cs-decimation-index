@@ -28,5 +28,10 @@ namespace DecimationIndex.Core.CArray
 		/// Индексы децимации в p-ичной системе счисления
 		/// </summary>
 		IList<string> CBasisList { get; }
+
+		/// <summary>
+		/// Основание системы счисления p
+		/// </summary>
+		int Basis { get; }
 	}
 }

@@ -3,28 +3,39 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:DecimationIndex.Ui.ViewModels"
+             d:DataContext="{d:DesignInstance viewModels:RVectorViewModel}"
              d:DesignHeight="450"
              d:DesignWidth="800"
              mc:Ignorable="d">
-	<UserControl.Resources>
-		<Style TargetType="TextBlock">
-			<Style.Setters>
-				<Setter Property="FontWeight" Value="SemiBold" />
-				<Setter Property="FontSize" Value="14" />
-			</Style.Setters>
-		</Style>
-	</UserControl.Resources>
-	<Border Margin="5"
-	        Padding="10"
-	        Background="LightGray"
-	        BorderBrush="Black"
-	        BorderThickness="2">
-		<StackPanel>
-			<TextBlock Text="{Binding InitialList}" />
-			<TextBlock Text="{Binding FilteredList}" />
-			<TextBlock Text="{Binding ThinnedList}" />
-			<TextBlock Text="{Binding PBasisList}" />
-			<TextBlock Text="{Binding GofRVector}" />
-		</StackPanel>
-	</Border>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<TextBlock Grid.Row="0"
+		           FontSize="16"
+		           FontWeight="SemiBold"
+				   Width="160"
+		           Text="Значения вектора R" />
+		<DataGrid Grid.Row="1"
+		          AutoGenerateColumns="False"
+		          ItemsSource="{Binding RVector}"
+		          ScrollViewer.CanContentScroll="True"
+		          SelectionMode="Extended"
+		          SelectionUnit="Cell"
+		          VerticalScrollBarVisibility="Auto">
+			<DataGrid.Columns>
+				<DataGridTextColumn Binding="{Binding Path=Value}"
+				                    FontSize="16"
+									Width="80"
+				                    Header="R" />
+				<DataGridTextColumn Binding="{Binding Path=BasisValue}"
+				                    FontSize="16"
+				                    Width="80"
+				                    Header="R_p" />
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
 </UserControl>

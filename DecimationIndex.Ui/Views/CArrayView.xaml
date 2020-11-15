@@ -3,29 +3,35 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             d:DesignHeight="450"
-             d:DesignWidth="800"
-             mc:Ignorable="d">
-	<UserControl.Resources>
-		<Style TargetType="TextBlock">
-			<Style.Setters>
-				<Setter Property="FontWeight" Value="SemiBold" />
-				<Setter Property="FontSize" Value="14" />
-			</Style.Setters>
-		</Style>
-	</UserControl.Resources>
-	<Border Margin="5"
-	        Padding="10"
-	        Background="LightGray"
-	        BorderBrush="Black"
-	        BorderThickness="2">
-		<StackPanel>
-			<TextBlock Text="{Binding CArray}" />
-			<TextBlock Text="{Binding C1Array}" />
-			<TextBlock Text="{Binding C2Array}" />
-			<TextBlock Text="{Binding C3Array}" />
-			<TextBlock Text="{Binding CBasisArray}" />
-			<TextBlock Text="{Binding MValue}" />
-		</StackPanel>
-	</Border>
+             xmlns:viewModels="clr-namespace:DecimationIndex.Ui.ViewModels"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:CArrayViewModel}">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<TextBlock Grid.Row="0"
+		           FontSize="16"
+		           FontWeight="SemiBold"
+		           Width="240"
+		           Text="Значения индексов децимации" />
+		<DataGrid Grid.Row="1"
+		          AutoGenerateColumns="False"
+		          ItemsSource="{Binding DecimationIndices}"
+		          ScrollViewer.CanContentScroll="True"
+		          SelectionMode="Extended"
+		          SelectionUnit="Cell"
+		          VerticalScrollBarVisibility="Auto">
+			<DataGrid.Columns>
+				<DataGridTextColumn Binding="{Binding Path=Value}"
+				                    FontSize="16"
+				                    Width="120"
+				                    Header="R" />
+				<DataGridTextColumn Binding="{Binding Path=BasisValue}"
+				                    FontSize="16"
+				                    Width="120"
+				                    Header="R_p" />
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
 </UserControl>
