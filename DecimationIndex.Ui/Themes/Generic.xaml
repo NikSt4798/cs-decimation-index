@@ -11,4 +11,8 @@
 		<views:CArrayView />
 	</DataTemplate>
 
+	<DataTemplate DataType="{x:Type viewModels:InfoViewModel}">
+		<views:InfoView />
+	</DataTemplate>
+
 </ResourceDictionary>

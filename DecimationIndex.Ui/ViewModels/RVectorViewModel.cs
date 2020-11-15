@@ -1,5 +1,7 @@
-﻿using DecimationIndex.Core.RVector;
-using DecimationIndex.Ui.Helpers;
+﻿using DecimationIndex.Core;
+using DecimationIndex.Core.RVector;
+using DecimationIndex.Ui.Items;
+using System.Collections.Generic;
 
 namespace DecimationIndex.Ui.ViewModels
 {
@@ -7,17 +9,18 @@ namespace DecimationIndex.Ui.ViewModels
 	{
 		public RVectorViewModel(IRVector rVector)
 		{
-			InitialList = rVector.InitialList.GetListString("Изначальный вектор R: ");
-			FilteredList = rVector.FilteredList.GetListString("НОД = 1 : ");
-			ThinnedList = rVector.ThinnedList.GetListString("Прореженный вектор R: ");
-			PBasisList = rVector.PBasisList.GetListString("Вектор R в p-ичной системе счисления: ");
-			GofRVector = rVector.GofRVector.GetListString("Вектор функций g(r): ");
+			foreach (var value in rVector.Vector)
+			{
+				var vector = new Vector
+				{
+					Value = value,
+					BasisValue = value.GetPBasis(rVector.Basis)
+				};
+
+				RVector.Add(vector);
+			}
 		}
 
-		public string InitialList { get; }
-		public string FilteredList { get; }
-		public string ThinnedList { get; }
-		public string PBasisList { get; }
-		public string GofRVector { get; }
+		public List<Vector> RVector { get; } = new List<Vector>();
 	}
 }
