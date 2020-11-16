@@ -26,7 +26,7 @@
 		</Grid.ColumnDefinitions>
 		<Grid Grid.RowSpan="2"
 		      Grid.Column="0"
-			  Width="320"
+		      Width="320"
 		      Margin="0,0,20,0">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
@@ -39,7 +39,7 @@
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
-				<RowDefinition Height="*"/>
+				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 			<TextBlock Grid.Row="0"
 			           Grid.Column="0"
@@ -120,15 +120,11 @@
 			          SelectedItem="{Binding SelectedRValue, UpdateSourceTrigger=PropertyChanged}"
 			          Visibility="{Binding RVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
 
-
-			<Expander Grid.Row="6"
-			          Grid.Column="0"
-			          Grid.ColumnSpan="2"
-			          ExpandDirection="Down"
-					  IsExpanded="False"
-			          Header="Подробная информация">
-				<ContentPresenter Width="300" Content="{Binding InfoViewModel}"/>
-			</Expander>
+			<ContentPresenter Grid.Row="6"
+			                  Grid.Column="0"
+			                  Grid.ColumnSpan="2"
+			                  Width="300"
+			                  Content="{Binding InfoViewModel}" />
 
 		</Grid>
 

@@ -26,11 +26,11 @@
 				<DataGridTextColumn Binding="{Binding Path=Value}"
 				                    FontSize="16"
 				                    Width="120"
-				                    Header="R" />
+				                    Header="Id" />
 				<DataGridTextColumn Binding="{Binding Path=BasisValue}"
 				                    FontSize="16"
 				                    Width="120"
-				                    Header="R_p" />
+				                    Header="p-ичная" />
 			</DataGrid.Columns>
 		</DataGrid>
 	</Grid>
