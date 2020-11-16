@@ -20,7 +20,8 @@ namespace DecimationIndex.Ui.ViewModels
 		public string C2Array { get; private set; }
 		public string C3Array { get; private set; }
 		public string CBasisArray { get; private set; }
-		public string MValue { get; private set; }
+		public string CVolume { get; private set; }
+		public string RVolume { get; private set; }
 		
 		public void InitVector(IRVector rVector)
 		{
@@ -29,12 +30,14 @@ namespace DecimationIndex.Ui.ViewModels
 			ThinnedList = rVector.ThinnedList.GetListString("Прореженный вектор R: ");
 			PBasisList = rVector.PBasisList.GetListString("Вектор R в p-ичной системе счисления: ");
 			GofRVector = rVector.GofRVector.GetListString("Вектор функций g(r): ");
+			RVolume = $"Объем вектора R: {rVector.ThinnedList.Count}";
 
 			OnPropertyChanged(nameof(InitialList));
 			OnPropertyChanged(nameof(FilteredList));
 			OnPropertyChanged(nameof(ThinnedList));
 			OnPropertyChanged(nameof(PBasisList));
 			OnPropertyChanged(nameof(GofRVector));
+			OnPropertyChanged(nameof(RVolume));
 		}
 
 		public void InitArray(ICArray cArray)
@@ -44,14 +47,14 @@ namespace DecimationIndex.Ui.ViewModels
 			C2Array = cArray.C2List.GetListString("Массив C2: ");
 			C3Array = cArray.C3List.GetListString("Индексы децимации: ");
 			CBasisArray = cArray.CBasisList.GetListString("Индексы децимации в p-ичной системе счисления: ");
-			MValue = $"Объем М массива : {cArray.C3List.Count}";
+			CVolume = $"Объем вектора индексов децимации М: {cArray.C3List.Count}";
 
 			OnPropertyChanged(nameof(CArray));
 			OnPropertyChanged(nameof(C1Array));
 			OnPropertyChanged(nameof(C2Array));
 			OnPropertyChanged(nameof(C3Array));
 			OnPropertyChanged(nameof(CBasisArray));
-			OnPropertyChanged(nameof(MValue));
+			OnPropertyChanged(nameof(CVolume));
 		}
 
 

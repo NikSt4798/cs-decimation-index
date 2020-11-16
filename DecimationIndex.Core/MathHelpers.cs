@@ -89,9 +89,9 @@ namespace DecimationIndex.Core
 				var digit = number % p;
 
 				if (digit >= 10)
-					result += digit.GetSymbol();
+					result = result.Insert(0, digit.GetSymbol().ToString());
 				else
-					result += digit.ToString();
+					result = result.Insert(0, digit.ToString());
 
 				number /= p;
 			}
